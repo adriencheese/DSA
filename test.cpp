@@ -4,24 +4,19 @@
 using namespace std;
 
 int main() {
+    vector<vector<int>> grid {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
 
-    int left = 0; 
-    int right = arr.size()-1;
-    
-    while (left <= right) {
-        int mid = (left + (right-left))/2;
-        
-        if (arr[mid] == true && arr[mid-1] == false) {
-            return mid;
-        }
-        
-        if (arr[mid] == true) {
-            right = mid - 1;
-        }
-        
-        else {
-            left = mid + 1;
+    int m = grid.size();
+    int n = grid[0].size();
+    vector<vector<int>> sum(m, vector<int>(n, grid[0][0]));
+
+    for(int i = 0; i < grid.size(); i++) {
+        for (int j = 0; j < grid[0].size(); j++) {
+            cout << "grid: " << grid[i][j] << endl;
         }
     }
-    return -1;
 }
