@@ -1,0 +1,26 @@
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        
+        //this method rotates the 4 corner cells from the top left
+        //progresses by working from top row (left corner) and works in towards center of top row
+	//next is second row second column corner, inwards. etc. 
+        
+        int n = matrix.size();
+        cout << n;
+        //x is the x and y coordinate of the cell being rotated (bc square x=y)
+        int x = 0;
+        //y is the 
+        int y = n-1;
+        
+        while (x < y) {
+            for (int i = 0; i < y-x; i++) {
+                swap(matrix[x][x+i], matrix[x+i][y]);
+                swap(matrix[x][x+i], matrix[y][y-i]);
+                swap(matrix[x][x+i], matrix[y-i][x]);
+            }
+            ++x;
+            --y;
+        }
+    }
+};
