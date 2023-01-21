@@ -1,25 +1,35 @@
 #include <iostream>
 #include <vector>
 
+void print_sol(std::vector<std::vector<int> > &order, std::vector<std::string> &list, int last_index) {
+    std::cout << list[last_index];
+    for (auto i : order[last_index]) {
+        print_sol(order, list, i);
+    }
+}
+
 int main() {
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(nullptr);
 
-    int N; std::cin >> N;
-    std::vector<std::string> list;
+    std::string res;
 
-    for (int i = 0; i < N; i++) {
+    int N; std::cin >> N;
+    std::vector<std::string> list (N + 1);
+
+    for (int i = 1; i <= N; i++) {
         std::string str; std::cin >> str;
-        list.push_back(str);
+        list[i] = str;
     }
 
-    int a, b;
+    int a = 1, b;
+    std::vector<std::vector<int> > order (N + 1, std::vector<int>());
+
     for (int i = 0; i < N - 1; i++) {
         std::cin >> a >> b;
         
-        list[a - 1] += (list[b - 1]);
-        list[b - 1].clear();
+        order[a].push_back(b);
     }
-
-    std::cout << list[a - 1] << "\n";
+    
+    print_sol(order, list, a);
 }
