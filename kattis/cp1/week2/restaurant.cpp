@@ -1,9 +1,14 @@
-#include <iostream>
+#include <iostream> 
 #include <vector>
-#include <string>
+#include <unordered_map>
 
 using namespace std;
 
+
+//TODO: 
+
+//  fails on first test case
+//  if reserve team has broken on each side, which to pick?
 int main() {
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(nullptr);
