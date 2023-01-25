@@ -8,19 +8,36 @@ int main() {
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(nullptr);
 
-    int N = 1; cin >> N;
+    // a = 2, b == 1
+
+    int N = 0; cin >> N;
     while (N != 0) {
+        int a = 0, b = 0;
         for (int i = 0; i < N; i++) {
-            string line; getline(cin, line);
-            
+            string line; cin >> line;
+            int quantity; cin >> quantity;
 
-            
+            if (line == "DROP") {
+                a += quantity;
+                cout << "DROP 2 " << quantity << "\n";
+            } else {
+                if (b >= quantity) {
+                    b -= quantity;
+                    cout << "TAKE 1 " << quantity << "\n";
+                } else {
+                    if (b != 0) {
+                        cout << "TAKE 1 " << b << "\n";
+                        quantity -= b;
+                        b = 0;
+                    }
+                    cout << "MOVE 2->1 " << a << "\n";
+                    b = a - quantity;
+                    a = 0;
+                    cout << "TAKE 1 " << quantity << "\n";
+                }
+            }
         }
-
+        cout << "\n";
         cin >> N;
     }
-
-
-
-
 }
