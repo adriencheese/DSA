@@ -24,18 +24,23 @@ int main() {
 
     int remaining = line.size();
 
+    int low_index = 0;
+
     while(remaining > 0) {
-        int i = 0;
+        int i = low_index;
 
         if (line[i].first < 0) {
             i++;
+            low_index = i;
             continue;
         }
 
+        low_index = i;
         int curr_min = line[i].first;
         int max = -1;
         int index;
 
+        // cout << "check lowest" << endl;
         while(line[i].first == curr_min || line[i].first < 0) {
             if (line[i].first < 0) {
                 i++;
@@ -46,26 +51,30 @@ int main() {
                 max = line[i].second;
                 index = i;
             }
-            i++;
-        }
-
-        for (int j = 0; j < line.size(); j++) {
-            line[j].first--;
-            if (line[j].first == -1) {
-                remaining--;
-            }
+            i++;    
         }
 
         line[index].first = -1;
+        --remaining;
+
+        for (int j = 0; j < line.size(); j++) {
+            line[j].first--;
+            // cout << "check decrement: " << line[j].first << endl;
+            if (line[j].first == -1) {
+                --remaining;
+            }
+        }
+
 
         count += max;
 
-        cout << "recap: " << count << ", " << remaining << endl;
+        // cout << "recap: " << count << ", " << remaining << endl;
         
-        for (auto j : line) {
-            cout << j.first << ", " << j.second << endl;
-        }
-        cout << endl;
+        // for (auto j : line) {
+        //     cout << j.first << ", " << j.second << endl;
+        // }
+        // cout << endl;
+
     }
 
     cout << count;
