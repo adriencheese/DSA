@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <set>
+#include <tuple>
+#include <array>
 
 using namespace std;
 
@@ -10,7 +12,7 @@ int main() {
 
     int h, c; cin >> h >> c;
     
-    set<pair<int, int> > coworkers;
+    multiset<array<long long, 3> > coworkers;
 
     long long max_annoyance = 0;
 
@@ -20,26 +22,27 @@ int main() {
             max_annoyance = a;
         }
 
-        coworkers.insert(make_pair(a, d));
+        coworkers.insert({a + d, a, d});
     }
 
-    set<pair<int, int> >::iterator itr;
+    multiset<array<long long, 3> >::iterator actual_itr;
 
     for (int i = 0; i < h; i++) {
+        actual_itr = coworkers.begin();
 
-        itr = coworkers.begin();
-        pair<int, int> temp = *itr;
-        coworkers.erase(itr);
+        array<long long, 3> temp = *actual_itr;
+        coworkers.erase(actual_itr);
 
-        temp.first += temp.second;
+        temp[0] += temp[2];
+        temp[1] += temp[2];
 
-        if (temp.first > max_annoyance) {
-            max_annoyance = temp.first;
+        if (temp[1] > max_annoyance) {
+            max_annoyance = temp[1];
         }
 
-        coworkers.insert(make_pair(temp.first, temp.second));
+        coworkers.insert({temp[0], temp[1], temp[2]});
 
-        itr++;
+        actual_itr++;
     }
 
     cout << max_annoyance;
