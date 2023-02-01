@@ -29,6 +29,4 @@ int main() {
 
     long ratio = max / min;
 
-    while ()
-
 }
