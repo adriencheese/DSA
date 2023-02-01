@@ -22,24 +22,18 @@ int main() {
 
     long long count = 0;
 
-    for (int i = 0; i < line.size(); i++) {
-        cout << "start: " << line[i].first << ", " << line[i].second << endl;
-
+    for (int i = 0; i < line.size();) {
         int curr_min = line[i].first;
-
-        int nested = i;
         int max = -1;
 
-        while(line[nested].first == curr_min) {
-            if (line[nested].second > max) {
-                max = line[nested].second;
+        while(line[i].first == curr_min) {
+            if (line[i].second > max) {
+                max = line[i].second;
             }
-            nested++;
+            i++;
         }
 
         count += max;
-        i = nested;
-        cout << i << ": " << count << endl;
     }
 
     cout << count;
