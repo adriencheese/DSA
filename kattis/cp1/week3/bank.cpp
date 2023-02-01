@@ -22,18 +22,50 @@ int main() {
 
     long long count = 0;
 
-    for (int i = 0; i < line.size();) {
+    int remaining = line.size();
+
+    while(remaining > 0) {
+        int i = 0;
+
+        if (line[i].first < 0) {
+            i++;
+            continue;
+        }
+
         int curr_min = line[i].first;
         int max = -1;
+        int index;
 
-        while(line[i].first == curr_min) {
+        while(line[i].first == curr_min || line[i].first < 0) {
+            if (line[i].first < 0) {
+                i++;
+                continue;
+            }
+
             if (line[i].second > max) {
                 max = line[i].second;
+                index = i;
             }
             i++;
         }
 
+        for (int j = 0; j < line.size(); j++) {
+            line[j].first--;
+            if (line[j].first == -1) {
+                remaining--;
+            }
+        }
+
+        line[index].first = -1;
+
         count += max;
+
+        cout << "recap: " << count << ", " << remaining << endl;
+        
+        for (auto j : line) {
+            cout << j.first << ", " << j.second << endl;
+        }
+        cout << endl;
     }
 
     cout << count;

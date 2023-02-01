@@ -9,10 +9,10 @@ int main() {
     cin.tie(nullptr);
 
     int n, m; cin >> n >> m;
-    long count = 0;
-    long temp;
+    long long count = 0;
+    long long temp;
 
-    vector<long> weights;
+    vector<long long> weights;
     for (int i= 0; i < n; i++) {
         cin >> temp;
         weights.push_back(temp);
@@ -20,9 +20,9 @@ int main() {
 
     sort(weights.begin(), weights.end());
 
-    long a, b;
+    long long a, b;
 
-    vector<pair<long, long> > mongers;
+    vector<pair<long long, long long> > mongers;
     for (int i = 0; i < m; i++) {
         cin >> a >> b;
         mongers.push_back(make_pair(b, a));
@@ -32,23 +32,15 @@ int main() {
 
     int itr = mongers.size() - 1;
 
- //     fix MULITPLICATION OF INTEGERS OVERLFOWING
-
-    long cd = 100000;
-    long xc = 100000;
-    long testing = cd * xc;
-    cout << testing << endl;
-
     for (int i = weights.size() - 1; i >= 0; i--) {
-        long x = weights[i];
-        long y = mongers[itr].first;
-        long result = x * y;
-        count += result;
-        cout << count << ", " << result << endl;
+        count += weights[i] * mongers[itr].first;
         mongers[itr].second--;
 
         if (mongers[itr].second == 0) {
             itr--;
+            if (itr < 0) {
+                break;
+            }
         }
     }
 
