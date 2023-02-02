@@ -2,9 +2,6 @@
 #include <vector>
 #include <algorithm>
 
-// use vector of available times
-// sort by most monies, then assign that person to the latest time they can receive money
-
 using namespace std;
 
 int main() {
@@ -13,8 +10,8 @@ int main() {
 
     int N, T; cin >> N >> T;
 
-    vector<pair<int, int> > line;
-    vector<int> timeslots (N);
+    vector<pair<long long, long long> > line;
+    vector<long long> timeslots (N, 0);
 
     int a, b;
     for (int i = 0; i < N; i++) {
@@ -24,5 +21,24 @@ int main() {
 
     sort(line.begin(), line.end());
 
-    
+    for (int i = N - 1; i >= 0; i--) {
+        long long spot = line[i].second;
+
+        while (timeslots[spot] != 0) {
+            spot--;
+        }
+
+        if (spot < 0) {
+            continue;
+        } else {
+            timeslots[spot] = line[i].first;
+        }
+    }
+
+    long long count = 0;
+    for (auto i : timeslots) {
+        count += i;
+    }
+
+    cout << count;
 }
