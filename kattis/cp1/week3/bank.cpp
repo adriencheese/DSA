@@ -14,6 +14,7 @@ int main() {
     int N, T; cin >> N >> T;
 
     vector<pair<int, int> > line;
+    vector<int> timeslots (N);
 
     int a, b;
     for (int i = 0; i < N; i++) {
