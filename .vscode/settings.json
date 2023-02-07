@@ -8,6 +8,10 @@
         "xhash": "cpp",
         "xiosbase": "cpp",
         "list": "cpp",
-        "xstring": "cpp"
-    }
+        "xstring": "cpp",
+        "ostream": "cpp",
+        "set": "cpp",
+        "array": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
