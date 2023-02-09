@@ -31,30 +31,26 @@ int main() {
     for (auto i : needed) {
         int flag = 0;
         int left = 0, right = available_sizes.size() - 1;
-        int best_index = left;
 
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-
-            if (available_sizes[mid] == i) { // don't need to add to sum if sizes are =
-                best_index = mid;
+        while (left != right) {
+            int mid = (left + right) / 2;
+            if (available_sizes[mid] == i) {
                 flag = 1;
                 break;
-            } else if (available_sizes[mid] < i) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
             }
-
-            if (abs(available_sizes[mid] - i) <= abs(available_sizes[best_index] - i)) {
-                available_sizes[best_index] - i < 0 ? best_index = mid + 1 : best_index = mid;
+            if (available_sizes[mid] < i) {
+                left = mid + 1;
+            }
+            else {
+                right = mid;
             }
         }
 
         if (flag == 1) {
             continue;
         }
-        total += abs(available_sizes[best_index] - i);
+
+        total += abs(available_sizes[left] - i);
     }
 
     cout << total;
