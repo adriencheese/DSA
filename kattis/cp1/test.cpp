@@ -10,5 +10,5 @@ int main() {
     dp.insert(2);
     dp.insert(3);
 
-    cout << &dp.rbegin() << " - " << *dp.rbegin() << endl;
+    cout << *dp.rbegin() << endl;
 }
