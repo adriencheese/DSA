@@ -1,5 +1,6 @@
 #include <iostream>
 #include <set>
+#include <climits>
 
 using namespace std;
 
@@ -10,5 +11,10 @@ int main() {
     dp.insert(2);
     dp.insert(3);
 
-    cout << &dp.rbegin() << " - " << *dp.rbegin() << endl;
+    for (auto i : dp) {
+        cout << i << endl;
+    }
+
+    cout << INT_MAX - 1000 << endl;
+
 }
