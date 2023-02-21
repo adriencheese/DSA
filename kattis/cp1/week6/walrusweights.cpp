@@ -50,7 +50,9 @@ int main() {
         }
     }
 
-    if (check - 1000 > 1000 - *dp.rbegin()) {
+    if (found) {
+        cout << 1000;
+    } else if (check - 1000 > 1000 - *dp.rbegin()) {
         cout << *dp.rbegin();
     } else {
         cout << check;
