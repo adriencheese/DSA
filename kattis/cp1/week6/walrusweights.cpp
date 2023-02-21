@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <set>
 
 using namespace std;
 
@@ -10,15 +11,41 @@ int main() {
     int n; cin >> n;
     vector<int> inputs;
     for (int i = 0; i < n; i++) {
-        cin
+        int temp; cin >> temp;
+        inputs.push_back(temp);
     }
 
-    vector<int> dp(1001);
-    dp[0] = 
-    int count = 0;
+    set<int> dp;
 
-    while (count < 1000) {
+    bool found = false;
 
+    int check = INT_MAX;
+
+    for (auto i : inputs) {
+        for (auto j : dp) {
+            if (i + j == 1000) {
+                found = true;
+                break;
+            }
+
+            if (!dp.contains(i + j)) {
+                if (i + j > 1000) {
+                    if (i + j < check) {
+                        check = i + j;
+                    }
+                    continue;
+                }
+                dp.insert(i + j);
+            }
+        }
+        if (found) {
+            break;
+        }
     }
 
+    set<int>::iterator itr;
+    dp.rbegin
+
+// loop back from dp[1000] to find sol
+// check with min value > 1000
 }
