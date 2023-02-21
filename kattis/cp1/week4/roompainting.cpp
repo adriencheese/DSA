@@ -37,11 +37,9 @@ int main() {
             if (available_sizes[mid] == i) {
                 flag = 1;
                 break;
-            }
-            if (available_sizes[mid] < i) {
+            } if (available_sizes[mid] < i) {
                 left = mid + 1;
-            }
-            else {
+            } else {
                 right = mid;
             }
         }
