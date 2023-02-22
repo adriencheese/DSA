@@ -26,7 +26,7 @@ int main() {
             cin >> errands[i].first;
         } else {
             cin >> errands[i].second;
-            dp[errands[i].second][errands[i].first]
+            dp[abs(errands[i].second - home[1])][abs(errands[i].first - home[0])] = 1;
         }
     }
 
@@ -36,7 +36,8 @@ int main() {
 
     for (int i = 0; i < y; i++) {
         for (int j = 0; j < x; j++) {
-
+            dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]) + dp[i][j];
         }
     }
+    
 }
