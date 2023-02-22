@@ -17,4 +17,5 @@ int main() {
 
     cout << INT_MAX - 1000 << endl;
 
+    cout << *dp.rbegin() << endl;
 }

@@ -50,13 +50,8 @@ int main() {
         }
     }
 
-    if (found) {
-        cout << 1000;
-    } else if (check - 1000 > 1000 - *dp.rbegin()) {
-        cout << *dp.rbegin();
-    } else {
-        cout << check;
-    }
+    set<int>::iterator itr;
+    dp.rbegin
 
 // loop back from dp[1000] to find sol
 // check with min value > 1000
