@@ -40,4 +40,5 @@ int main() {
         }
     }
     
+    cout << dp[y][x] << "\n";
 }
