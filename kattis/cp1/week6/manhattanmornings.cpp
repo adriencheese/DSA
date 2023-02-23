@@ -20,15 +20,24 @@ int main() {
     
     vector<vector<int> > dp (y, vector<int> (x, 0));
 
-    vector<pair<int, int> > errands(n);
-    for (int i = 0; i < n; i++) {
+    for (auto i : dp) {
+        for (auto j : i) {
+            cout << j << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+    
+    vector<pair<int, int> > errands(n, make_pair(0, 0));
+    for (int i = 0; i < 2 * n; i++) {
         if (i % 2 == 0) {
-            cin >> errands[i].first;
+            cin >> errands[i / 2].first;
         } else {
-            cin >> errands[i].second;
-            dp[abs(errands[i].second - home[1])][abs(errands[i].first - home[0])] = 1;
+            cin >> errands[i / 2].second;
+            dp[abs(errands[i / 2].second - 1 + home[1])][abs(errands[i / 2].first - 1 + home[0])] = 1;
         }
     }
+
 
     // if you always take up or right move, total moves will be the same min
     // dp while only traversing this way
@@ -39,5 +48,5 @@ int main() {
         }
     }
     
-    cout << dp[y][x] << "\n";
+    cout << dp[y - 1][x - 1] << "\n";
 }

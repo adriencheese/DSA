@@ -21,7 +21,7 @@ int main() {
         }
 
         for (int i = 0; i < l; i++) {
-            cout << char(word[i] + 96);
+            cout << char(word[i] + 96) << "\n";
         }
     }
 }
