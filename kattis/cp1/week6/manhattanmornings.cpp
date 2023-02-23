@@ -33,7 +33,6 @@ int main() {
     // if you always take up or right move, total moves will be the same min
     // dp while only traversing this way
 
-
     for (int i = 0; i < y; i++) {
         for (int j = 0; j < x; j++) {
             dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]) + dp[i][j];

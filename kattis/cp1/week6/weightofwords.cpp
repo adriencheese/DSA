@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <climits>
 
 using namespace std;
 
@@ -8,14 +7,11 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int l, w; cin >> l >> w;
+    long double l, w; cin >> l >> w;
+    long double avg = w / l;
+    int mod = (int)w % (int)l;
 
-    long long avg = (long long) w / (long long) l;
-    cout << avg << endl;
-    int mod = w % l;
-    cout << mod << endl;
-
-    if (avg >= 26.0) {
+    if (avg > 26.0 || l > w) {
         cout << "impossible" << "\n";
     } else {
         vector<int> word (l, (int)avg);
