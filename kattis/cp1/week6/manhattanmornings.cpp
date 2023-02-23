@@ -18,7 +18,7 @@ int main() {
     int y = abs(home[3] - home[1]);
     int x = abs(home[2] - home[0]);
     
-    vector<vector<int> > dp (y, vector<int> (x, 0));
+    vector<vector<int> > dp (y + 1, vector<int> (x + 1, 0));
 
     for (auto i : dp) {
         for (auto j : i) {
@@ -34,19 +34,40 @@ int main() {
             cin >> errands[i / 2].first;
         } else {
             cin >> errands[i / 2].second;
-            dp[abs(errands[i / 2].second - 1 + home[1])][abs(errands[i / 2].first - 1 + home[0])] = 1;
+
+            cout << "pair: " << errands[i / 2].first << ", " << errands[i / 2].second << endl;
+
+            if (errands[i / 2].first > max(home[0], home[2]) ||
+                errands[i / 2].second > max(home[1], home[3])) {
+                    continue;
+            }
+
+            cout << "errand: " << abs(errands[i / 2].second - home[1]) << ", " << abs(errands[i / 2].first - home[0]) << endl;
+
+            dp[abs(errands[i / 2].second - home[1])][abs(errands[i / 2].first - home[0])]++; // multiple errands on same coord
         }
     }
 
+    for (auto i : dp) {
+        for (auto j : i) {
+            cout << j << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
 
     // if you always take up or right move, total moves will be the same min
     // dp while only traversing this way
 
-    for (int i = 0; i < y; i++) {
-        for (int j = 0; j < x; j++) {
+    // home to work is the same as work to home
+
+    for (int i = 0; i <= y; i++) {
+        for (int j = 0; j <= x; j++) {
             dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]) + dp[i][j];
         }
     }
+
+    cout << "here" << endl;
     
-    cout << dp[y - 1][x - 1] << "\n";
+    cout << dp[y][x] << "\n";
 }
