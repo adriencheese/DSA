@@ -5,6 +5,11 @@
 
 using namespace std;
 
+// if multiple edges from a node, add to a list of need to travel to
+// if just one edge, just traverse
+
+// hashmap for city names
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
