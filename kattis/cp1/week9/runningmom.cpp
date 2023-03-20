@@ -18,9 +18,6 @@ int main() {
     vector<pair<string, string> > list (n);
 
     for (int i = 0; i < n; i++) {
-        // getline(FILE, line);
-        // stringstream s(line);
-        // s >> list[i].first >> list[i].second;
         FILE >> list[i].first >> list[i].second;
         cout << "check: " << list[i].first << list[i].second << endl;
     }
@@ -33,6 +30,6 @@ int main() {
         check.push_back(line);
     }
 
-    
+
     
 }

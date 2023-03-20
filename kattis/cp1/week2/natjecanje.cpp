@@ -7,7 +7,7 @@ using namespace std;
 
 string best_painting = "";
 
-void dfs(vector<string> &color_list, vector<pair<string, string> > &color_bans, vector<string> &curr_seq, unordered_map<string, int> &tracking, int &count) {
+void dfs(unordered_map<int, string> &color_list, unordered_map<string, int> &reverse, unordered_map<int, vector<int> > &color_bans, vector<string> &curr_seq, unordered_map<int, int> &tracking, int &count) {
     if (curr_seq.size() == color_list.size()) {
       if (count == 0) {
         for (auto i : curr_seq) {
@@ -20,34 +20,19 @@ void dfs(vector<string> &color_list, vector<pair<string, string> > &color_bans, 
     }
 
     for (int i = 0; i < color_list.size(); i++) {
-        if (tracking[color_list[i]] > 0) {
+        if (tracking[i] > 0) {
             continue;
         }
 
-        int cont_flag = 0;
-        for (int j = 0; j < color_bans.size(); j++) {
-            if (curr_seq.size() == 0) {
-                break;
-            }
-            
-            if (color_bans[j].first == curr_seq[curr_seq.size() - 1] && color_list[i] == color_bans[j].second) {
-                cont_flag = 1;
-                break;
-            } else if (color_bans[j].second == curr_seq[curr_seq.size() - 1] && color_list[i] == color_bans[j].first) {
-                cont_flag = 1;
-                break;
-            }
-        }
-
-        if (cont_flag) {
+        if (curr_seq.size() > 0 && color_bans[reverse[curr_seq[curr_seq.size() - 1]]][i] == -1) {
             continue;
         }
 
         curr_seq.push_back(color_list[i]);
-        tracking[color_list[i]] = 1;
-        dfs(color_list, color_bans, curr_seq, tracking, count);
+        tracking[i] = 1;
+        dfs(color_list, reverse, color_bans, curr_seq, tracking, count);
         curr_seq.pop_back();
-        tracking[color_list[i]] = 0;
+        tracking[i] = 0;
     }
 }
 
@@ -60,25 +45,34 @@ int main() {
     for (int i = 0; i < T; i++) {
         int N; cin >> N;
         
-        vector<string> color_list;
+        unordered_map<int, string> color_list;
+        unordered_map<string, int> reverse;
+
         for (int j = 0; j < N; j++) {
-            string color; cin >> color;
-            color_list.push_back(color);
+            string col; cin >> col;
+            color_list[j] = col;
+            reverse[col] = j;
         }
 
-        vector<pair<string, string> > color_bans;
+        unordered_map<int, vector<int> > color_bans;
+        for (int j = 0; j < N; j++) {
+            for (int k = 0; k < N; k++) {
+                color_bans[j].push_back(k);
+            }
+        }
+
         int M; cin >> M;
         for(int j = 0; j < M; j++) {
             string color1, color2; cin >> color1 >> color2;
-
-            color_bans.push_back(make_pair(color1, color2));
+            color_bans[reverse[color1]][reverse[color2]] = -1;
+            color_bans[reverse[color2]][reverse[color1]] = -1;
         }
 
         int count = 0;
         vector<string> curr_seq;
 
-        unordered_map<string, int> tracking;
-        dfs(color_list, color_bans, curr_seq, tracking, count);
+        unordered_map<int, int> tracking;
+        dfs(color_list, reverse, color_bans, curr_seq, tracking, count);
         cout << count << "\n" << best_painting << "\n";
         best_painting = "";
     }
