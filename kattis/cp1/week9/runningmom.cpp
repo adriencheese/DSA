@@ -77,7 +77,7 @@ int main() {
         unordered_map<string, int> current_loop;
 
         if (safe_status[i] == -1) {
-            // cout << "checcking\n";
+            // cout << "checking\n";
             dfs(i, city_list, safe_status, current_loop);
         }
 
