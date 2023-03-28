@@ -7,20 +7,31 @@
 using namespace std;
 
 bool dfs(string &in, unordered_map<string, vector<string> > &city_list, set<string> &current_loop) {
+    // for (auto i : current_loop) {
+    //     cout << i << ", ";
+    // }
+    // cout << endl;
     if (current_loop.find(in) != current_loop.end()) {
+        // cout << "safe" << endl;
+        // cout << endl;
+
+        // current_loop.clear();
         current_loop.erase(in);
+        // cout << "return true" << endl;
         return true;
     }
 
     current_loop.insert(in);
 
     for (auto i : city_list[in]) {
+        // cout << in << " to " << i << endl;
         if (dfs(i, city_list, current_loop)) {
             return true;
         }
     }
 
     current_loop.erase(in);
+    // cout << "return false" << endl;
     return false;
 }
 
