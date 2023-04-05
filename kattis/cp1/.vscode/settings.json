@@ -6,6 +6,10 @@
         "xtree": "cpp",
         "cmath": "cpp",
         "utility": "cpp",
-        "ostream": "cpp"
-    }
+        "ostream": "cpp",
+        "xstring": "cpp",
+        "unordered_map": "cpp",
+        "xhash": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
