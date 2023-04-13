@@ -5,13 +5,11 @@
 
 using namespace std;
 
-long long can(vector<long long>& input, long double slice) {
+long long can(vector<long double>& input, long double slice) {
     long long num_of_slices = 0;
     for (long long i : input) {
-        num_of_slices += (i * i) / slice;
-        cout << "inc: " << i*i << ", " << slice << ", " << num_of_slices << endl;
+        num_of_slices += (int)(i / slice);
     }
-    cout << "can: " << slice << ", " << num_of_slices << endl;
     return num_of_slices;
 }
 
@@ -25,42 +23,32 @@ int main() {
     int test_cases; cin >> test_cases;
 
     for (int i = 0; i < test_cases; i++) {
-        vector<long long> input;
-        int N; cin >> N;
-        long long F; cin >> F;
-        F = 1000 * (F+1);
+        vector<long double> input;
+        long long N, F; cin >> N >> F;
+        F++;
 
-        long long right = 0;
-        int max = 0;
+        long double right = -1;
         for (int j = 0; j < N; j++) {
-            long long temp; cin >> temp;
-            temp *= 1000;
-            if (temp > max) {
-                max = temp * temp;
-                right = temp * temp;
+            long double temp; cin >> temp;
+            temp *= temp;
+            if (temp > right) {
+                right = temp;
             }
             input.push_back(temp);
         }
 
-        long long left = 0;
-        long long mid = 0;
+        long double left = 0;
+        long double mid = 0;
         while (left < right) {
-            cout << left << ", " << right << endl;
             mid = right - (right - left) / 2;
             long long val = can(input, (long double)mid);
 
             if (val >= F) {
-                left = mid;
+                left = mid + .0001;
             } else {
-                right = mid - 1;
+                right = mid - .0001;
             }
         }
-        cout << ((long long) mid) * M_PI / 1000 << "\n";
+        cout << (mid) * M_PI << "\n";
     }
 }
-
-/*
-1
-1 10000
-3
-*/
