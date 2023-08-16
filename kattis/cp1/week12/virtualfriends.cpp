@@ -5,6 +5,9 @@
 #include <set>
 #include <queue>
 
+// https://www.hackerearth.com/practice/notes/disjoint-set-union-union-find/
+// https://stackoverflow.com/questions/8300125/union-find-data-structure
+
 using namespace std;
 
 int bfs(unordered_map<string, vector<string> > &list, string& a, string& b) {
